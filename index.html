@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Gani — Scrum Master | Delivery Manager | Cloud</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0b;
+    --bg2: #111114;
+    --bg3: #18181c;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0f0ee;
+    --muted: #888884;
+    --accent: #4ade80;
+    --accent2: #22d3ee;
+    --accent3: #f59e0b;
+    --tag-bg: rgba(74,222,128,0.08);
+    --tag-border: rgba(74,222,128,0.2);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* Grid noise background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow orbs */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(74,222,128,0.04) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,11,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    padding: 7rem 0 5rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.88rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    white-space: nowrap;
+  }
+
+  h1 .dim { color: var(--muted); }
+  h1 .hl { color: var(--accent); }
+
+  .hero-desc {
+    max-width: 600px;
+    color: var(--muted);
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 4rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #0a0a0b;
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+    padding: 0.65rem 1.4rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* STAT STRIP */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 1rem;
+  }
+
+  .stat-item {
+    background: var(--bg2);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* SECTION LAYOUT */
+  section { padding: 5rem 0; border-top: 1px solid var(--border); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  /* CERTS */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+
+  .cert-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    transition: border-color 0.2s;
+  }
+
+  .cert-card:hover { border-color: var(--accent2); }
+
+  .cert-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(34,211,238,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  .cert-name {
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-group {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .skill-group:hover { border-color: var(--border2); }
+
+  .skill-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.84rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-group-title::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent2);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.92rem;
+    padding: 3px 10px;
+    border-radius: 4px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-meta {
+    padding-top: 4px;
+  }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.86rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .exp-company {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .exp-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-family: 'DM Mono', monospace;
+    background: rgba(74,222,128,0.07);
+    border: 1px solid rgba(74,222,128,0.15);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .exp-bullets li {
+    display: flex;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .exp-bullets li::before {
+    content: '›';
+    color: var(--accent3);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* EDUCATION */
+  .edu-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .edu-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .edu-item:hover { border-color: var(--border2); }
+
+  .edu-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba(245,158,11,0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.2rem;
+  }
+
+  .edu-degree {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .edu-school {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s;
+  }
+
+  .contact-card:hover { border-color: var(--accent); }
+
+  .contact-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--bg3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+  }
+
+  .contact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+  }
+
+  .contact-value {
+    font-size: 0.96rem;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+    word-break: break-all;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * {
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-eyebrow { animation-delay: 0.1s; }
+  h1 { animation-delay: 0.2s; }
+  .hero-desc { animation-delay: 0.3s; }
+  .hero-links { animation-delay: 0.4s; }
+  .stat-strip { animation-delay: 0.5s; }
+
+  @media (max-width: 680px) {
+    h1 { font-size: 2.4rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .achievements-grid { grid-template-columns: 1fr; }
+    .stat-strip { grid-template-columns: 1fr; }
+    nav ul { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="#" class="nav-logo">MG<span>.</span></a>
+    <ul>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Available for opportunities</div>
+    <h1>Muhammad <span class="dim">Gani</span></h1>
+    <p class="hero-desc">Results-driven Scrum Master and Delivery Manager with 15+ years of enterprise technology delivery at ANZ Bank. Specialist in platform modernisation, hybrid cloud adoption, and infrastructure at scale.</p>
+    <div class="hero-links">
+      <a href="mailto:itsbablu@hotmail.com" class="btn-primary">✉ Get In Touch</a>
+      <a href="https://linkedin.com/in/muhammadgani001" class="btn-ghost" target="_blank">↗ LinkedIn</a>
+    </div>
+    <div class="stat-strip">
+      <div class="stat-item">
+        <span class="stat-num">15+</span>
+        <span class="stat-label">Years at ANZ</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">8K+</span>
+        <span class="stat-label">Servers Patched / Month</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Squads Led Simultaneously</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs">
+    <div class="section-header">
+      <span class="section-tag">Certified</span>
+      <h2>Certifications</h2>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-icon">☁</div>
+        <div class="cert-name">AWS Certified AI Practitioner</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">⚡</div>
+        <div class="cert-name">SAFe® 5 Scrum Master</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">📋</div>
+        <div class="cert-name">Certified Scrum Product Owner®</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🔷</div>
+        <div class="cert-name">SAFe Agilist (SA)</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">🛠</div>
+        <div class="cert-name">ITIL v3 Foundation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header">
+      <span class="section-tag">Expertise</span>
+      <h2>Core Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Agile & Delivery</div>
+        <div class="skill-tags">
+          <span class="skill-tag">SAFe / Scrum</span>
+          <span class="skill-tag">Kanban</span>
+          <span class="skill-tag">PI Planning</span>
+          <span class="skill-tag">Backlog Management</span>
+          <span class="skill-tag">RAID Management</span>
+          <span class="skill-tag">Scrum of Scrums</span>
+          <span class="skill-tag">Agile Coaching</span>
+          <span class="skill-tag">Stakeholder Management</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Infrastructure & Cloud</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Windows Server</span>
+          <span class="skill-tag">VMware vSphere</span>
+          <span class="skill-tag">VCF-VMC</span>
+          <span class="skill-tag">Hyper-V</span>
+          <span class="skill-tag">AWS EC2</span>
+          <span class="skill-tag">Hybrid Cloud</span>
+          <span class="skill-tag">Citrix / VDI</span>
+          <span class="skill-tag">Patch Management</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools & Automation</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Jira</span>
+          <span class="skill-tag">Confluence</span>
+          <span class="skill-tag">ServiceNow</span>
+          <span class="skill-tag">SCCM</span>
+          <span class="skill-tag">Puppet</span>
+          <span class="skill-tag">Ansible</span>
+          <span class="skill-tag">PowerShell</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">Codefresh</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Vendor Management</span>
+          <span class="skill-tag">CAB / Change Mgmt</span>
+          <span class="skill-tag">Major Incident Mgmt</span>
+          <span class="skill-tag">ITIL Processes</span>
+          <span class="skill-tag">ICT Project Delivery</span>
+          <span class="skill-tag">Cross-team Coordination</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header">
+      <span class="section-tag">Career</span>
+      <h2>Employment History</h2>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-date">Jan 2020 – Present</span>
+          <span class="exp-company">ANZ Bank</span>
+          <span class="exp-badge">Current</span>
+        </div>
+        <div>
+          <div class="exp-role">Scrum Master / Delivery Manager — Commodity Compute</div>
+          <ul class="exp-bullets">
+            <li>Lead end-to-end Agile delivery for two infrastructure squads (Windows and Hybrid Cloud) within ANZ's Commodity Compute domain, aligning delivery to enterprise platform roadmaps.</li>
+            <li>Facilitate Agile ceremonies including stand-ups, sprint planning, backlog refinement, retrospectives, and Scrum of Scrums across distributed engineering teams.</li>
+            <li>Manage and prioritise backlogs in Jira (Epics, Features, User Stories), ensuring clear scope, sequencing, and delivery visibility.</li>
+            <li>Drive quarterly PI planning; coordinate cross-squad dependencies through stakeholder workshops and planning sessions.</li>
+            <li>Remove delivery impediments and maintain consistent sprint velocity across complex infrastructure environments.</li>
+            <li>Coach engineering teams on Agile maturity and continuous improvement practices.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-date">Oct 2018 – Jan 2020</span>
+          <span class="exp-company">ANZ Bank</span>
+        </div>
+        <div>
+          <div class="exp-role">Senior Engineer — Commodity Compute (IaaS)</div>
+          <ul class="exp-bullets">
+            <li>Delivered Level 3 support across Windows Server, VMware, Hyper-V, and Citrix/VDI platforms, resolving critical incidents with minimal business disruption.</li>
+            <li>Led major incident management and root cause analysis, reducing recurrence through robust problem management processes.</li>
+            <li>Developed automation scripts to streamline operational tasks, reducing manual effort and improving platform reliability.</li>
+            <li>Coordinated server patching, SOE deployments, and release activities across enterprise infrastructure.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-date">Jul 2016 – Oct 2018</span>
+          <span class="exp-company">ANZ Bank</span>
+        </div>
+        <div>
+          <div class="exp-role">Systems Engineer — Global Windows Platform Management</div>
+          <ul class="exp-bullets">
+            <li>Maintained 24/7 availability of enterprise Windows and virtual infrastructure across global platforms.</li>
+            <li>Led Citrix deployments for Wealth and Insurance business releases and delivered Hyper-V uplift and VMware workload migrations.</li>
+            <li>Managed SCCM operations including patching, imaging, and software packaging for thousands of endpoints.</li>
+            <li>Led disaster recovery exercises and mentored junior engineers, strengthening team capability.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-date">Sep 2012 – Jul 2016</span>
+          <span class="exp-company">ANZ Bank</span>
+        </div>
+        <div>
+          <div class="exp-role">Technical Analyst / Work Request Delivery Manager — Client Services (WA)</div>
+          <ul class="exp-bullets">
+            <li>Delivered Level 2 support for global desktop and server environments in a 24/7 follow-the-sun model.</li>
+            <li>Executed monthly patching cycle for 4,000+ Windows servers, ensuring security compliance across multiple domains.</li>
+            <li>Managed end-to-end ICT project delivery initiatives for ANZ Branches valued up to $1M, including requirements gathering and CAB approvals.</li>
+            <li>Led rollout of 50+ kiosks across WA, SA, and NT branches, coordinating vendors and technical teams.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header">
+      <span class="section-tag">Academic</span>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-list">
+      <div class="edu-item">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-degree">Bachelor of Information Technology</div>
+          <div class="edu-school">Central Queensland University — 2004</div>
+        </div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-icon">📡</div>
+        <div>
+          <div class="edu-degree">Diploma of Network Engineering</div>
+          <div class="edu-school">Australian Business College — 2001–2002</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 2rem;">
+      <div class="section-header" style="margin-bottom: 1rem;">
+        <span class="section-tag">Learning</span>
+        <h2 style="font-size: 1.2rem;">Professional Development</h2>
+      </div>
+      <div class="skill-tags" style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <span class="skill-tag">VMware Cloud on AWS: Deploy and Manage</span>
+        <span class="skill-tag">VMware vSphere: Troubleshooting (v7)</span>
+        <span class="skill-tag">Windows Server Vital Signs 1 & 2</span>
+        <span class="skill-tag">Strategic Thinking</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header">
+      <span class="section-tag">Connect</span>
+      <h2>Get In Touch</h2>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:itsbablu@hotmail.com" class="contact-card">
+        <div class="contact-icon">✉</div>
+        <div>
+          <span class="contact-label">Email</span>
+          <span class="contact-value">itsbablu@hotmail.com</span>
+        </div>
+      </a>
+      <a href="tel:+61412256038" class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div>
+          <span class="contact-label">Phone</span>
+          <span class="contact-value">+61 412 256 038</span>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/muhammadgani001" target="_blank" class="contact-card">
+        <div class="contact-icon">in</div>
+        <div>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-value">muhammadgani001</span>
+        </div>
+      </a>
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <div>
+          <span class="contact-label">Location</span>
+          <span class="contact-value">Perth, WA, Australia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>© 2025 Muhammad Gani — Scrum Master · Delivery Manager · Infrastructure & Cloud</p>
+</footer>
+
+</body>
+</html>
